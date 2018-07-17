@@ -1,0 +1,5 @@
+*.pyc
+auth.py
+log.txt
+__pycache__/
+upload/
