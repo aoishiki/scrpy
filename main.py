@@ -1,4 +1,3 @@
-# github test
 # coding=utf-8
 import os
 import glob
@@ -93,8 +92,12 @@ def time_flag(time) :
 while 1:
     t = datetime.now().minute
     if time_flag(t) :
-        for tweet in api.statuses.home_timeline() :
-            get_img(tweet)
-        upload_img(upload_folder)
-        print("message : "+datetime.now().strftime("%Y-%m-%d %H.%M.%S")+"に処理が実行されました")
-        time.sleep(60)
+        try :
+            for tweet in api.statuses.home_timeline() :
+                get_img(tweet)
+            upload_img(upload_folder)
+            print("message : "+datetime.now().strftime("%Y-%m-%d %H.%M.%S")+"に処理が実行されました")
+            time.sleep(60)
+        except :
+            print("message : "+datetime.now().strftime("%Y-%m-%d %H.%M.%S")+"にエラーが発生しました")
+            sleep(600)
