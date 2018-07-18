@@ -100,4 +100,4 @@ while 1:
             time.sleep(60)
         except :
             print("message : "+datetime.now().strftime("%Y-%m-%d %H.%M.%S")+"にエラーが発生しました")
-            sleep(600)
+            time.sleep(600)
