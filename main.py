@@ -20,7 +20,7 @@ def download(url, file_name):
             shutil.copyfileobj(r.raw, f)
 
 def get_img_url(tw_d) :
-    return tw_d["media"][0]["media_url_https"]
+    return tw_d["media_url_https"]
 
 def get_db_folder(path) :
     for entry in dbx.files_list_folder(path).entries:
@@ -51,18 +51,19 @@ def check_log(name) :
 
 def get_img(tweet) :
     try:
-        tw_data = tweet["entities"]
+        tw_data = tweet["extended_entities"]
         if "media" in tw_data:
-            url = get_img_url(tw_data)
-            name = get_img_name(url)
-            if  check_log(name) :
-                print(url)
-                download(url,name)
-                try :
-                    shutil.move("./"+name,upload_folder)
-                except:
-                    #clean local dir
-                    os.remove("./"+name)
+            for data_num in tw_data["media"] :
+                url = get_img_url(data_num)
+                name = get_img_name(url)
+                if  check_log(name) :
+                    print(url)
+                    download(url,name)
+                    try :
+                        shutil.move("./"+name,upload_folder)
+                    except:
+                        #clean local dir
+                        os.remove("./"+name)
     except:
         pass
 
